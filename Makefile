@@ -4,12 +4,16 @@ GOBUILD=$(GOCMD) build
 GOCLEAN=$(GOCMD) clean
 GOTEST=$(GOCMD) test
 GOGET=$(GOCMD) get
+GOLINTER=golangci-lint
 BINARY_NAME=gocopy
 
-all: test build
+all: lint test build
 
-build:/
+build:
 	$(GOBUILD) -o $(BINARY_NAME) -v
+
+lint:
+	$(GOLINTER) run -v
 
 test:
 	$(GOTEST) -v ./...
